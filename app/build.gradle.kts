@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -63,6 +64,9 @@ dependencies {
 
     // Glide dependencies
     implementation("com.github.bumptech.glide:glide:4.12.0")
+
+    // Cardview
+    implementation("androidx.cardview:cardview:1.0.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
 
 }

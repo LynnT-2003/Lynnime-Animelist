@@ -6,6 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lynnime.R
 import com.example.lynnime.api.RetrofitClient
@@ -25,6 +29,8 @@ class HomeFragment : Fragment() {
     private lateinit var horrorMovieAdapter: HorrorMovieAdapter
     private var horrorMoviesList: MutableList<HorrorMovieData> = mutableListOf()
 
+    private lateinit var navController: NavController
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +43,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
 
         initRecyclerView()
 //        getAnimeData()
@@ -86,8 +94,26 @@ class HomeFragment : Fragment() {
 //        binding.animeRecyclerView.layoutManager = LinearLayoutManager(context)
 //        binding.animeRecyclerView.adapter = animeAdapter
 
-        horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList)
-        binding.animeRecyclerView.layoutManager = LinearLayoutManager(context)
+        val spanCount = 2
+
+        horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList) { horrorMovie ->
+            // Implement navigation to MovieDetailsFragment with the selected movie
+//            navigateToMovieDetails(horrorMovie)
+//            navigateToMovieDetails()
+            val bundle = Bundle().apply {
+                putParcelable("movieData", horrorMovie)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle)
+        }
+        binding.animeRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
         binding.animeRecyclerView.adapter = horrorMovieAdapter
     }
+
+    private fun navigateToMovieDetails() {
+        navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment)
+    }
+
+//    private fun navigateToMovieDetails(horrorMovie: HorrorMovieData) {
+//        // TODO: navigate to movie details, passing selectedMovieData
+//    }
 }
