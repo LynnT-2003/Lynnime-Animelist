@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Lynnime</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="onboarding_message">This is the onboarding screen.</string>
-    <string name="this_is_sign_in_page">This is Sign In Page</string>
+    <string name="hello_blank_fragment">Welcome to a New Adventure</string>
+    <string name="onboarding_message">Discover a universe of anime with Lynnime.</string>
+    <string name="this_is_sign_in_page">Sign In and Explore Your Anime Journey</string>
     <string name="dummy_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="function_1">Seamless Search Experience</string>
+    <string name="function_2">Personalized Watchlists</string>
+    <string name="function_3">Connect and Share</string>
+    <string name="desc_1">Effortlessly find the anime you love or discover new gems with our intuitive search feature.</string>
+    <string name="desc_2">Organize your anime watchlists. Stay on top of your anime game with a curated list that matches your mood and preferences.</string>
+    <string name="desc_3">Spread the joy of anime by sharing your watchlists with friends and family. Because joy shared is joy doubled!</string>
 </resources>

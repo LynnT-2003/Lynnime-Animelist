@@ -69,4 +69,6 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
 
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
 }

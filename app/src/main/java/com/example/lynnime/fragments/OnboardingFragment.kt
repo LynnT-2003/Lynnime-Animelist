@@ -31,7 +31,8 @@ class OnboardingFragment : Fragment() {
         navControl = Navigation.findNavController(view)
 
         Handler(Looper.myLooper()!!).postDelayed(Runnable {
-            navControl.navigate(R.id.action_onboardingFragment_to_signInFragment)
+//            navControl.navigate(R.id.action_onboardingFragment_to_signInFragment)
+            navControl.navigate(R.id.action_onboardingFragment_to_carouselFragment)
         }, 2000)
     }
 }

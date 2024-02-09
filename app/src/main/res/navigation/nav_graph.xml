@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_onboardingFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_carouselFragment"
+            app:destination="@id/carouselFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -51,4 +54,12 @@
         android:id="@+id/movieDetailsFragment"
         android:name="com.example.lynnime.fragments.MovieDetailsFragment"
         android:label="MovieDetailsFragment" />
+    <fragment
+        android:id="@+id/carouselFragment"
+        android:name="CarouselFragment"
+        android:label="CarouselFragment" >
+        <action
+            android:id="@+id/action_carouselFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>
