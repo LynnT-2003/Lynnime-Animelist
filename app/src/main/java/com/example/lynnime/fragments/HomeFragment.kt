@@ -18,6 +18,9 @@ import com.example.lynnime.models.AnimeData
 import com.example.lynnime.models.HorrorMovieData
 import com.example.lynnime.utils.AnimeAdapter
 import com.example.lynnime.utils.HorrorMovieAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class HomeFragment : Fragment() {
@@ -45,6 +48,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
+
+        binding.btnSignOut.setOnClickListener {
+            Firebase.auth.signOut()
+            navController.navigate(R.id.onboardingFragment)
+        }
 
         initRecyclerView()
 //        getAnimeData()
