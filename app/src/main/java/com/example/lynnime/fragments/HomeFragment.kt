@@ -19,6 +19,7 @@ import com.example.lynnime.models.HorrorMovieData
 import com.example.lynnime.utils.AnimeAdapter
 import com.example.lynnime.utils.HorrorMovieAdapter
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -49,6 +50,9 @@ class HomeFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+        val currentUser = Firebase.auth.currentUser
+        updateUI(currentUser)
+
         binding.btnSignOut.setOnClickListener {
             Firebase.auth.signOut()
             navController.navigate(R.id.onboardingFragment)
@@ -57,6 +61,16 @@ class HomeFragment : Fragment() {
         initRecyclerView()
 //        getAnimeData()
         getHorrorMovies()
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            // Set the TextView to the user's display name
+            binding.tv1.text = "Welcome " + user.displayName
+        } else {
+            // Handle the case where the user is null (not signed in or signed out)
+            binding.tv1.text = "Not signed in"
+        }
     }
 
 //    private fun getAnimeData() {
