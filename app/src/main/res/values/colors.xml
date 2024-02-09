@@ -5,7 +5,10 @@
     <color name="blue">#FF0000FF</color>
     <color name="gray">#FFAAAAAA</color>
 
-    <color name="background">#F0F4F3</color>
+    <color name="background">#FFD1E3</color>
+    <color name="bg2">#A367B1</color>
+    <color name="bg3">#5D3587</color>
+    <color name="bg4">#392467</color>
     <color name="buttontext">#50C2C9</color>
 
     <color name="google_blue">#459DE4</color>

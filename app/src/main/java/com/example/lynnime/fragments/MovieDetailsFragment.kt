@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.lynnime.R
 import com.example.lynnime.models.HorrorMovieData
 
 class MovieDetailsFragment : Fragment() {
+
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +29,8 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
 
         val selectedMovie = arguments?.getParcelable<HorrorMovieData>("movieData")
 
@@ -47,7 +53,8 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun navigateBackToHomeFragment() {
-        findNavController().navigate(R.id.homeFragment)
+//        findNavController().navigate(R.id.homeFragment)
+        navController.navigate(R.id.action_movieDetailsFragment_to_homeFragment )
     }
 
 }

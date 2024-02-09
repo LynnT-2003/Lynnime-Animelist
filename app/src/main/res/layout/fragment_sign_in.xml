@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv1"/>
 
     <TextView
-        android:id="@+id/textViewSignIn"
+        android:id="@+id/textViewSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go to Sign Up"
@@ -36,5 +36,15 @@
         app:layout_constraintStart_toStartOf="@id/tv1"
         app:layout_constraintTop_toBottomOf="@id/tv1"
         android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnGoogleSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Google Log in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSignUp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
