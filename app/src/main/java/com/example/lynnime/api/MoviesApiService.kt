@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface MoviesApiService {
-    @GET("horror")
+    @GET("animation")
     fun getHorrorMovies(): Call<List<HorrorMovieData>>
 }
