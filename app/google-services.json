@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "816051741160",
+    "project_id": "lynnime-auth-db",
+    "storage_bucket": "lynnime-auth-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816051741160:android:7a9aa705726db400af045d",
+        "android_client_info": {
+          "package_name": "com.example.lynnime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816051741160-ldep1jfcoe47eqanbqfd4m3ruvg62akn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lynnime",
+            "certificate_hash": "191c4eb923f202cdb524e7ae4704072ca06f0dd9"
+          }
+        },
+        {
+          "client_id": "816051741160-7qgvhfvmmoag5ghlkibjqa201me52fl3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAQ41BTSbncEvitbmGnSBG_bZpDU4-BVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816051741160-7qgvhfvmmoag5ghlkibjqa201me52fl3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

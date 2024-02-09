@@ -7,4 +7,8 @@
 
     <color name="background">#F0F4F3</color>
     <color name="buttontext">#50C2C9</color>
+
+    <color name="google_blue">#459DE4</color>
+    <color name="google_red">#FF0000</color>
+
 </resources>
