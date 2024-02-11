@@ -56,13 +56,13 @@ class SignInFragment : Fragment() {
             signIn()
         }
 
-        binding.btnSignInToHome.setOnClickListener {
-            navControl.navigate(R.id.action_signInFragment_to_homeFragment)
-        }
+//        binding.btnSignInToHome.setOnClickListener {
+//            navControl.navigate(R.id.action_signInFragment_to_homeFragment)
+//        }
 
-        binding.textViewSignUp.setOnClickListener {
-            navControl.navigate(R.id.action_signInFragment_to_signUpFragment)
-        }
+//        binding.textViewSignUp.setOnClickListener {
+//            navControl.navigate(R.id.action_signInFragment_to_signUpFragment)
+//        }
 
         googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {

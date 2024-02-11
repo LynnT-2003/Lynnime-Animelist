@@ -1,50 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_signin_1"
     tools:context=".fragments.SignInFragment">
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv1"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/this_is_sign_in_page"-->
+    <!--        android:layout_marginLeft="-69dp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/btnSignInToHome"-->
+    <!--        android:layout_width="55dp"-->
+    <!--        android:layout_height="55dp"-->
+    <!--        android:layout_marginTop="-36dp"-->
+    <!--        android:layout_marginLeft="14dp"-->
+    <!--        android:src="@drawable/btn"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewSignUp"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Go to Sign Up"-->
+    <!--        android:textColor="@color/blue"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/tv1"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tv1"-->
+    <!--        android:layout_marginTop="16dp"/>-->
+
+    <ImageView
+        android:id="@+id/iv1"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/circle_anime_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topLogo" />
+
+    <Button
+        android:id="@+id/btnGoogleSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_google_sign_in_button"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:layout_marginTop="36dp"
+        android:text="Sign in with Google"
+        android:paddingHorizontal="50dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv1" />
+
 
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/this_is_sign_in_page"
-        android:layout_marginLeft="-69dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Get Started"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv1" />
 
     <ImageView
-        android:id="@+id/btnSignInToHome"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="-36dp"
-        android:layout_marginLeft="14dp"
-        android:src="@drawable/btn"
-        app:layout_constraintStart_toEndOf="@id/tv1"
-        app:layout_constraintTop_toBottomOf="@id/tv1"/>
-
-    <TextView
-        android:id="@+id/textViewSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to Sign Up"
-        android:textColor="@color/blue"
-        app:layout_constraintStart_toStartOf="@id/tv1"
-        app:layout_constraintTop_toBottomOf="@id/tv1"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/btnGoogleSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Google Log in"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/topLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewSignUp"/>
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/google_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnGoogleSignIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
