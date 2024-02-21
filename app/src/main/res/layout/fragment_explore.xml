@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_explore">
+    android:background="@drawable/dark_discovery_bg">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#00193D"
+                android:background="#0D5ED2"
                 android:textColor="#FFFFFF"
                 android:paddingVertical="4dp"
                 android:paddingHorizontal="12dp"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:background="#00193D"
+                android:background="#0D5ED2"
                 android:textColor="#FFFFFF"
                 android:paddingVertical="4dp"
                 android:paddingHorizontal="12dp"
@@ -67,7 +67,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Jujutsu Kaisen"
             android:textSize="30dp"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="@id/cover"
             app:layout_constraintTop_toBottomOf="@id/tags" />
 
@@ -76,7 +76,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="@string/dummy_title_description"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintEnd_toEndOf="@id/cover"
             app:layout_constraintTop_toBottomOf="@id/title"
@@ -97,28 +97,28 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="@drawable/info_final" />
+                android:background="@drawable/dark_info_2" />
 
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="43.75dp"
-                android:background="@drawable/dislike" />
+                android:background="@drawable/dark_dislike" />
 
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="43.75dp"
-                android:background="@drawable/like" />
+                android:background="@drawable/dark_like" />
 
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="43.75dp"
-                android:background="@drawable/add" />
+                android:background="@drawable/dark_add" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
