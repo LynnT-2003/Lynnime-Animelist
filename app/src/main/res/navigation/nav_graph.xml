@@ -5,6 +5,10 @@
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/onboardingFragment">
 
+    <action
+        android:id="@+id/action_global_exploreFragment"
+        app:destination="@id/exploreFragment" />
+
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.example.lynnime.fragments.OnboardingFragment"
@@ -69,4 +73,8 @@
             android:id="@+id/action_carouselFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.example.lynnime.fragments.ExploreFragment"
+        android:label="ExploreFragment" />
 </navigation>

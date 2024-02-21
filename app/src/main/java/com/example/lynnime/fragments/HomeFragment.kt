@@ -18,6 +18,7 @@ import com.example.lynnime.models.AnimeData
 import com.example.lynnime.models.HorrorMovieData
 import com.example.lynnime.utils.AnimeAdapter
 import com.example.lynnime.utils.HorrorMovieAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -52,6 +53,19 @@ class HomeFragment : Fragment() {
 
         val currentUser = Firebase.auth.currentUser
         updateUI(currentUser)
+
+        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.setOnNavigationItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_discover -> {
+                    // Navigate to the ExploreFragment
+                    val action = /* Action ID or Fragment class */
+                        // If using NavController
+                        findNavController().navigate(R.id.action_global_exploreFragment)
+                    true
+                }
+                else -> false
+            }}
 
         binding.btnSignOut.setOnClickListener {
             Firebase.auth.signOut()
