@@ -6,8 +6,16 @@
     app:startDestination="@id/onboardingFragment">
 
     <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment" />
+
+    <action
         android:id="@+id/action_global_exploreFragment"
         app:destination="@id/exploreFragment" />
+
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment" />
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -77,4 +85,9 @@
         android:id="@+id/exploreFragment"
         android:name="com.example.lynnime.fragments.ExploreFragment"
         android:label="ExploreFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.lynnime.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

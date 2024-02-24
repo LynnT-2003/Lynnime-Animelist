@@ -49,27 +49,30 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view)
+//        navController = Navigation.findNavController(view)
 
         val currentUser = Firebase.auth.currentUser
         updateUI(currentUser)
 
-        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNav.setOnNavigationItemReselectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_discover -> {
-                    // Navigate to the ExploreFragment
-                    val action = /* Action ID or Fragment class */
-                        // If using NavController
-                        findNavController().navigate(R.id.action_global_exploreFragment)
-                    true
-                }
-                else -> false
-            }}
+
+
+//        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+//        bottomNav.setOnNavigationItemReselectedListener { item ->
+//            when (item.itemId) {
+//                R.id.navigation_discover -> {
+//                    findNavController().navigate(R.id.action_global_exploreFragment)
+//                }
+//            }
+//            when (item.itemId) {
+//                R.id.navigation_profile-> {
+//                    findNavController().navigate(R.id.action_global_profileFragment)
+//                }
+//            }
+//        }
 
         binding.btnSignOut.setOnClickListener {
             Firebase.auth.signOut()
-            navController.navigate(R.id.onboardingFragment)
+            findNavController().navigate(R.id.onboardingFragment)
         }
 
         initRecyclerView()
@@ -147,6 +150,10 @@ class HomeFragment : Fragment() {
 
     private fun navigateToMovieDetails() {
         navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment)
+    }
+
+    private fun navigateToDiscoverScreen() {
+        navController.navigate(R.id.action_global_exploreFragment)
     }
 
 //    private fun navigateToMovieDetails(horrorMovie: HorrorMovieData) {

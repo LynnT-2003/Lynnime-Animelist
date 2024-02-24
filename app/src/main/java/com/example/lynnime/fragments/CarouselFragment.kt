@@ -62,6 +62,11 @@ class CarouselFragment : Fragment() {
 
         val nextButton = view.findViewById<Button>(R.id.nextbtn)
         val backButton = view.findViewById<Button>(R.id.backbtn)
+        val skipButton = view.findViewById<Button>(R.id.skipButton)
+
+        skipButton.setOnClickListener {
+            navigateToHome()
+        }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
