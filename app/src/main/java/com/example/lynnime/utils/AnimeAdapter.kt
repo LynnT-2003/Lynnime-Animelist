@@ -49,12 +49,16 @@ import com.example.lynnime.R
 class AnimeAdapter(
     private val animeList: List<JikanAnimeModel.Anime>, // Update to use the Jikan model
     private val onAnimeClick: (JikanAnimeModel.Anime) -> Unit,
-    private val limitTitleLength: Boolean = false
+    private val limitTitleLength: Boolean = false,
+    private val showRecentlyAddedLabel: Boolean = false,
+    private val showPopularLabel: Boolean = false
 ) : RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
 
     class AnimeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.movieTitleTextView)
         val posterImageView: ImageView = view.findViewById(R.id.moviePosterImageView)
+        val recentlyAddedLabelView: TextView = view.findViewById(R.id.recentlyAddedLabel)
+        val popularLabel: TextView = view.findViewById(R.id.popularLabel)
 //        val scoreTextView: TextView = view.findViewById(R.id.animeScoreTextView)
         // Add more views if needed
     }
@@ -69,12 +73,24 @@ class AnimeAdapter(
         val anime = animeList[position]
 
         var title = anime.titleEnglish ?: "Title not available"
-        if (limitTitleLength && title.length > 15) {
-            title = title.substring(0,12) + "..."
+        if (limitTitleLength && title.length > 20) {
+            title = title.substring(0,17) + "..."
         }
         holder.titleTextView.text = title
 
-        val imageUrl = anime.images.jpg.largeImageUrl ?: "" // Fallback to empty string if null
+        if (position < 3 && showRecentlyAddedLabel) {
+            holder.recentlyAddedLabelView.visibility = View.VISIBLE
+        } else {
+            holder.recentlyAddedLabelView.visibility = View.GONE
+        }
+
+        if (position < 5 && showPopularLabel) {
+            holder.popularLabel.visibility = View.VISIBLE
+        } else {
+            holder.popularLabel.visibility = View.GONE
+        }
+
+        val imageUrl = anime.images.jpg.largeImageUrl ?: ""
         Glide.with(holder.posterImageView.context)
             .load(imageUrl)
             .into(holder.posterImageView)

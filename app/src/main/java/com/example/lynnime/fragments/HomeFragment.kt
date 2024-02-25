@@ -51,10 +51,10 @@ class HomeFragment : Fragment() {
         val currentUser = Firebase.auth.currentUser
         updateUI(currentUser)
 
-        binding.btnSignOut.setOnClickListener {
-            Firebase.auth.signOut()
-            findNavController().navigate(R.id.onboardingFragment)
-        }
+//        binding.btnSignOut.setOnClickListener {
+//            Firebase.auth.signOut()
+//            findNavController().navigate(R.id.onboardingFragment)
+//        }
 
         initRecyclerView()
         initUpcomingRecyclerView()
@@ -107,8 +107,6 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
-
     private fun initRecyclerView() {
         animeAdapter = AnimeAdapter(animeList, { anime ->
             if (isAdded) {
@@ -117,7 +115,7 @@ class HomeFragment : Fragment() {
                 }
                 findNavController().safeNavigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle)
             }
-        }, limitTitleLength = true)
+        }, limitTitleLength = true, showRecentlyAddedLabel = true)
 
         binding.animeRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.animeRecyclerView.adapter = animeAdapter
@@ -132,7 +130,7 @@ class HomeFragment : Fragment() {
                 }
                 findNavController().safeNavigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle)
             }
-        }, limitTitleLength = true)
+        }, limitTitleLength = true, showPopularLabel = true)
 
         binding.animeRecyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.animeRecyclerView2.adapter = upcomingAnimeAdapter

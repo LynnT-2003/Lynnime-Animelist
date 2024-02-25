@@ -3,44 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/dark_discovery_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/app_logo"
+        android:layout_margin="12dp"/>
+
 
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginLeft="12dp"
         android:text="Welcome back User"
-        android:textSize="24sp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintStart_toStartOf="@id/animeRecyclerView"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="@id/logo"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
         />
 
-    <Button
-        android:id="@+id/btnSignOut"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginLeft="24dp"
-        android:text="Sign Out"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/tv1"
-        app:layout_constraintTop_toTopOf="@id/tv1"
-        app:layout_constraintBottom_toBottomOf="@id/tv1"/>
+<!--    <Button-->
+<!--        android:id="@+id/btnSignOut"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:text="Sign Out"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/tv1"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tv1"/>-->
 
     <TextView
         android:id="@+id/currentTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tv1"
-        app:layout_constraintTop_toBottomOf="@id/tv1"
-        android:text="Currently Airing"
-        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingTop="24dp"
         android:paddingBottom="6dp"
-        android:paddingTop="16dp"/>
+        android:text="Currently Airing"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/logo"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/currentTv"
         app:layout_constraintTop_toBottomOf="@id/currentTv"
         android:paddingBottom="6dp"
     />
@@ -57,19 +68,21 @@
         android:id="@+id/popularTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tv1"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintStart_toStartOf="@id/logo"
         app:layout_constraintTop_toBottomOf="@id/animeRecyclerView"
-        android:text="Currently Airing"
-        android:textSize="16sp"
+        android:text="New / Upcoming"
+        android:textSize="24sp"
+        android:textColor="@color/white"
         android:paddingBottom="6dp"
-        android:paddingTop="16dp"/>
+        android:paddingTop="24dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/animeRecyclerView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/popularTv"
         app:layout_constraintTop_toBottomOf="@id/popularTv"
         app:layout_constraintBottom_toBottomOf="parent"
         android:paddingBottom="64dp"

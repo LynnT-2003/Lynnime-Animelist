@@ -20,6 +20,27 @@
         android:textSize="24dp"
         android:text="This is the Profile Page" />
 
+    <TextView
+        android:id="@+id/userTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/signOutBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Firebase User "
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="4dp"/>
+
+    <Button
+        android:id="@+id/signOutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Sign Out"/>
+
     <include layout="@layout/layout_footer"
         android:id="@+id/footerNav"
         android:layout_width="match_parent"

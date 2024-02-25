@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.lynnime.R
 import com.example.lynnime.databinding.FragmentProfileBinding
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
@@ -24,5 +28,21 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val currentUser = Firebase.auth.currentUser
+        updateUI(currentUser)
+
+        binding.signOutBtn.setOnClickListener {
+            Firebase.auth.signOut()
+            findNavController().navigate(R.id.onboardingFragment)
+        }
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            binding.userTv.text = user.displayName
+        } else {
+            binding.userTv.text = "User Not Available (Note to Self: Please don't get disappointed at this message"
+        }
     }
 }
