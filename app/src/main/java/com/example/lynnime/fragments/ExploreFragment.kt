@@ -45,7 +45,7 @@ class ExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList) {}
-        animeAdapter = AnimeAdapter(animeList) {}
+        animeAdapter = AnimeAdapter(animeList, {})
 
         super.onViewCreated(view, savedInstanceState)
         fetchAnimeData()

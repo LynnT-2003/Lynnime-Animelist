@@ -48,7 +48,8 @@ import com.example.lynnime.R
 
 class AnimeAdapter(
     private val animeList: List<JikanAnimeModel.Anime>, // Update to use the Jikan model
-    private val onAnimeClick: (JikanAnimeModel.Anime) -> Unit
+    private val onAnimeClick: (JikanAnimeModel.Anime) -> Unit,
+    private val limitTitleLength: Boolean = false
 ) : RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
 
     class AnimeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -66,7 +67,13 @@ class AnimeAdapter(
 
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val anime = animeList[position]
-        holder.titleTextView.text = anime.titleEnglish ?: "Title not available"
+
+        var title = anime.titleEnglish ?: "Title not available"
+        if (limitTitleLength && title.length > 15) {
+            title = title.substring(0,12) + "..."
+        }
+        holder.titleTextView.text = title
+
         val imageUrl = anime.images.jpg.largeImageUrl ?: "" // Fallback to empty string if null
         Glide.with(holder.posterImageView.context)
             .load(imageUrl)
