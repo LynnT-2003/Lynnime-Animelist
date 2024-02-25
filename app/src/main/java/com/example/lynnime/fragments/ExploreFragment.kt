@@ -42,32 +42,32 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList) {}
         super.onViewCreated(view, savedInstanceState)
-        getHorrorMovies()
-        view.setOnClickListener {
-            if (horrorMoviesList.isNotEmpty()) {
-                currentIndex = (currentIndex + 1) % horrorMoviesList.size
-                updateUI(horrorMoviesList[currentIndex])
-            }
-        }
+//        getHorrorMovies()
+//        view.setOnClickListener {
+//            if (horrorMoviesList.isNotEmpty()) {
+//                currentIndex = (currentIndex + 1) % horrorMoviesList.size
+//                updateUI(horrorMoviesList[currentIndex])
+//            }
+//        }
     }
 
-    private fun getHorrorMovies() {
-        RetrofitClient.instance.getHorrorMovies().enqueue(object : retrofit2.Callback<List<HorrorMovieData>> {
-            override fun onResponse(call: retrofit2.Call<List<HorrorMovieData>>, response: retrofit2.Response<List<HorrorMovieData>>) {
-                if (response.isSuccessful) {
-                    horrorMoviesList.clear()
-                    horrorMoviesList.addAll(response.body()!!)
-                    horrorMovieAdapter.notifyDataSetChanged()
-                } else {
-                    Log.e("HomeFragment", "Error: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: retrofit2.Call<List<HorrorMovieData>>, t: Throwable) {
-                Log.e("HomeFragment", "Failure: ${t.message}")
-            }
-        })
-    }
+//    private fun getHorrorMovies() {
+//        RetrofitClient.instance.getHorrorMovies().enqueue(object : retrofit2.Callback<List<HorrorMovieData>> {
+//            override fun onResponse(call: retrofit2.Call<List<HorrorMovieData>>, response: retrofit2.Response<List<HorrorMovieData>>) {
+//                if (response.isSuccessful) {
+//                    horrorMoviesList.clear()
+//                    horrorMoviesList.addAll(response.body()!!)
+//                    horrorMovieAdapter.notifyDataSetChanged()
+//                } else {
+//                    Log.e("HomeFragment", "Error: ${response.message()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: retrofit2.Call<List<HorrorMovieData>>, t: Throwable) {
+//                Log.e("HomeFragment", "Failure: ${t.message}")
+//            }
+//        })
+//    }
 
     fun updateUI(movie: HorrorMovieData) {
         binding.title.text = movie.title

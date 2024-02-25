@@ -1,5 +1,6 @@
 package com.example.lynnime.fragments
 
+import JikanAnimeModel
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,21 +28,139 @@ import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
+//    private lateinit var binding: FragmentHomeBinding
+//    private lateinit var animeAdapter: AnimeAdapter
+//    private var animeList: MutableList<AnimeData> = mutableListOf()
+//
+//    private lateinit var horrorMovieAdapter: HorrorMovieAdapter
+//    private var horrorMoviesList: MutableList<HorrorMovieData> = mutableListOf()
+//
+//    private lateinit var navController: NavController
+//
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        // Inflate the layout for this fragment
+//        binding = FragmentHomeBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+////        navController = Navigation.findNavController(view)
+//
+//        val currentUser = Firebase.auth.currentUser
+//        updateUI(currentUser)
+//
+//
+//
+////        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+////        bottomNav.setOnNavigationItemReselectedListener { item ->
+////            when (item.itemId) {
+////                R.id.navigation_discover -> {
+////                    findNavController().navigate(R.id.action_global_exploreFragment)
+////                }
+////            }
+////            when (item.itemId) {
+////                R.id.navigation_profile-> {
+////                    findNavController().navigate(R.id.action_global_profileFragment)
+////                }
+////            }
+////        }
+//
+//        binding.btnSignOut.setOnClickListener {
+//            Firebase.auth.signOut()
+//            findNavController().navigate(R.id.onboardingFragment)
+//        }
+//
+//        initRecyclerView()
+////        getAnimeData()
+//        getHorrorMovies()
+//    }
+//
+////    private fun getAnimeData() {
+////        RetrofitClient.instance.getAnimeList().enqueue(object : retrofit2.Callback<List<AnimeData>> {
+////            override fun onResponse(call: retrofit2.Call<List<AnimeData>>, response: retrofit2.Response<List<AnimeData>>) {
+////                if (response.isSuccessful) {
+////                    animeList.clear()
+////                    animeList.addAll(response.body()!!)
+////                    Log.d("HomeFragment", "Fetched anime list size: ${animeList.size}")
+////                    animeAdapter.notifyDataSetChanged()
+////                } else {
+////                    Log.e("HomeFragment", "Error fetching data")
+////                }
+////            }
+////
+////            override fun onFailure(call: retrofit2.Call<List<AnimeData>>, t: Throwable) {
+////                Log.e("HomeFragment", "Failure: ${t.message}")
+////            }
+////        })
+////    }
+//
+//    private fun getHorrorMovies() {
+//        RetrofitClient.instance.getHorrorMovies().enqueue(object : retrofit2.Callback<List<HorrorMovieData>> {
+//            override fun onResponse(call: retrofit2.Call<List<HorrorMovieData>>, response: retrofit2.Response<List<HorrorMovieData>>) {
+//                if (response.isSuccessful) {
+//                    horrorMoviesList.clear()
+//                    horrorMoviesList.addAll(response.body()!!)
+//                    horrorMovieAdapter.notifyDataSetChanged()
+//                } else {
+//                    Log.e("HomeFragment", "Error: ${response.message()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: retrofit2.Call<List<HorrorMovieData>>, t: Throwable) {
+//                Log.e("HomeFragment", "Failure: ${t.message}")
+//            }
+//        })
+//    }
+//
+//
+//    private fun initRecyclerView() {
+////        animeAdapter = AnimeAdapter(animeList)
+////        binding.animeRecyclerView.layoutManager = LinearLayoutManager(context)
+////        binding.animeRecyclerView.adapter = animeAdapter
+//
+//        val spanCount = 2
+//
+//        horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList) { horrorMovie ->
+//            // Implement navigation to MovieDetailsFragment with the selected movie
+////            navigateToMovieDetails(horrorMovie)
+////            navigateToMovieDetails()
+//            val bundle = Bundle().apply {
+//                putParcelable("movieData", horrorMovie)
+//            }
+//            findNavController().navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle)
+//        }
+//        binding.animeRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
+//        binding.animeRecyclerView.adapter = horrorMovieAdapter
+//    }
+//
+//    private fun navigateToMovieDetails() {
+//        navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment)
+//    }
+//
+//    private fun navigateToDiscoverScreen() {
+//        navController.navigate(R.id.action_global_exploreFragment)
+//    }
+//
+////    private fun navigateToMovieDetails(horrorMovie: HorrorMovieData) {
+////        // TODO: navigate to movie details, passing selectedMovieData
+////    }
+
+
     private lateinit var binding: FragmentHomeBinding
     private lateinit var animeAdapter: AnimeAdapter
-    private var animeList: MutableList<AnimeData> = mutableListOf()
-
-    private lateinit var horrorMovieAdapter: HorrorMovieAdapter
-    private var horrorMoviesList: MutableList<HorrorMovieData> = mutableListOf()
+    private var animeList: MutableList<JikanAnimeModel.Anime> = mutableListOf() // Update this based on your Anime data class
 
     private lateinit var navController: NavController
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,26 +168,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        navController = Navigation.findNavController(view)
-
         val currentUser = Firebase.auth.currentUser
         updateUI(currentUser)
-
-
-
-//        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-//        bottomNav.setOnNavigationItemReselectedListener { item ->
-//            when (item.itemId) {
-//                R.id.navigation_discover -> {
-//                    findNavController().navigate(R.id.action_global_exploreFragment)
-//                }
-//            }
-//            when (item.itemId) {
-//                R.id.navigation_profile-> {
-//                    findNavController().navigate(R.id.action_global_profileFragment)
-//                }
-//            }
-//        }
 
         binding.btnSignOut.setOnClickListener {
             Firebase.auth.signOut()
@@ -76,8 +177,7 @@ class HomeFragment : Fragment() {
         }
 
         initRecyclerView()
-//        getAnimeData()
-        getHorrorMovies()
+        fetchAnimeData()
     }
 
     private fun updateUI(user: FirebaseUser?) {
@@ -90,73 +190,42 @@ class HomeFragment : Fragment() {
         }
     }
 
-//    private fun getAnimeData() {
-//        RetrofitClient.instance.getAnimeList().enqueue(object : retrofit2.Callback<List<AnimeData>> {
-//            override fun onResponse(call: retrofit2.Call<List<AnimeData>>, response: retrofit2.Response<List<AnimeData>>) {
-//                if (response.isSuccessful) {
-//                    animeList.clear()
-//                    animeList.addAll(response.body()!!)
-//                    Log.d("HomeFragment", "Fetched anime list size: ${animeList.size}")
-//                    animeAdapter.notifyDataSetChanged()
-//                } else {
-//                    Log.e("HomeFragment", "Error fetching data")
-//                }
-//            }
-//
-//            override fun onFailure(call: retrofit2.Call<List<AnimeData>>, t: Throwable) {
-//                Log.e("HomeFragment", "Failure: ${t.message}")
-//            }
-//        })
-//    }
-
-    private fun getHorrorMovies() {
-        RetrofitClient.instance.getHorrorMovies().enqueue(object : retrofit2.Callback<List<HorrorMovieData>> {
-            override fun onResponse(call: retrofit2.Call<List<HorrorMovieData>>, response: retrofit2.Response<List<HorrorMovieData>>) {
-                if (response.isSuccessful) {
-                    horrorMoviesList.clear()
-                    horrorMoviesList.addAll(response.body()!!)
-                    horrorMovieAdapter.notifyDataSetChanged()
+    private fun fetchAnimeData() {
+        RetrofitClient.instance.getCurrentSeasonAnime().enqueue(object : retrofit2.Callback<JikanAnimeModel> { // Use the correct callback type
+            override fun onResponse(call: retrofit2.Call<JikanAnimeModel>, response: retrofit2.Response<JikanAnimeModel>) {
+                if (response.isSuccessful && response.body() != null) {
+                    animeList.clear()
+                    animeList.addAll(response.body()!!.data) // Ensure your API's response structure is correctly navigated
+                    animeAdapter.notifyDataSetChanged()
                 } else {
-                    Log.e("HomeFragment", "Error: ${response.message()}")
+                    Log.e("HomeFragment", "Error fetching anime data")
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<List<HorrorMovieData>>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<JikanAnimeModel>, t: Throwable) {
                 Log.e("HomeFragment", "Failure: ${t.message}")
             }
         })
     }
 
-
     private fun initRecyclerView() {
-//        animeAdapter = AnimeAdapter(animeList)
-//        binding.animeRecyclerView.layoutManager = LinearLayoutManager(context)
-//        binding.animeRecyclerView.adapter = animeAdapter
-
-        val spanCount = 2
-
-        horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList) { horrorMovie ->
-            // Implement navigation to MovieDetailsFragment with the selected movie
-//            navigateToMovieDetails(horrorMovie)
-//            navigateToMovieDetails()
-            val bundle = Bundle().apply {
-                putParcelable("movieData", horrorMovie)
+        animeAdapter = AnimeAdapter(animeList) { anime ->
+            if (isAdded) {
+                val bundle = Bundle().apply {
+                    putParcelable("animeData", anime) // Make sure your Anime data class implements Parcelable
+                }
+                findNavController().safeNavigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle)
         }
-        binding.animeRecyclerView.layoutManager = GridLayoutManager(context, spanCount)
-        binding.animeRecyclerView.adapter = horrorMovieAdapter
+        binding.animeRecyclerView.layoutManager = GridLayoutManager(context, 2) // Using 2 columns for grid
+        binding.animeRecyclerView.adapter = animeAdapter
     }
 
-    private fun navigateToMovieDetails() {
-        navController.navigate(R.id.action_homeFragment_to_movieDetailsFragment)
+    fun NavController.safeNavigate(destinationId: Int, bundle: Bundle? = null) {
+        currentDestination?.let { currentDestination ->
+            if (currentDestination.id != destinationId) {
+                navigate(destinationId, bundle)
+            }
+        }
     }
-
-    private fun navigateToDiscoverScreen() {
-        navController.navigate(R.id.action_global_exploreFragment)
-    }
-
-//    private fun navigateToMovieDetails(horrorMovie: HorrorMovieData) {
-//        // TODO: navigate to movie details, passing selectedMovieData
-//    }
 }

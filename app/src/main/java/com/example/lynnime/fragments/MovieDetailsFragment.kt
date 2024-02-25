@@ -32,17 +32,17 @@ class MovieDetailsFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        val selectedMovie = arguments?.getParcelable<HorrorMovieData>("movieData")
+//        val selectedMovie = arguments?.getParcelable<HorrorMovieData>("movieData")
+        val selectedAnime = arguments?.getParcelable<JikanAnimeModel.Anime>("animeData")
 
         val posterImageView = view.findViewById<ImageView>(R.id.detailMoviePosterImageView)
         val titleTextView = view.findViewById<TextView>(R.id.detailMovieTitleTextView)
         val descriptionTextView = view.findViewById<TextView>(R.id.detailMovieDescriptionTextView)
 
-        selectedMovie?.let { movie ->
-            Glide.with(this).load(movie.posterURL).into(posterImageView)
-            titleTextView.text = movie.title
-            // Set a dummy description or actual data if available
-            descriptionTextView.text = getString(R.string.dummy_description) // Replace with actual movie description if available
+        selectedAnime?.let { anime ->
+            Glide.with(this).load(anime.images.jpg.largeImageUrl).into(posterImageView)
+            titleTextView.text = anime.titleEnglish ?: "Title not Available"
+            descriptionTextView.text = anime.synopsis
         }
 
         // Handle back press
