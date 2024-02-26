@@ -45,7 +45,7 @@ class ExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList) {}
-        animeAdapter = AnimeAdapter(animeList, {})
+        animeAdapter = AnimeAdapter(animeList, {}, limitTitleLength = true)
 
         super.onViewCreated(view, savedInstanceState)
         fetchAnimeData()
@@ -108,9 +108,16 @@ class ExploreFragment : Fragment() {
 //        // Update tags, etc.
 //    }
 
+    private fun limitCharacters(text: String, maxChars: Int): String {
+        if (text != null) {
+            return if (text.length <= maxChars) text else text.take(maxChars) + "..."
+        }
+        return "(Title Not Available)"
+    }
+
     private fun updateUI(anime: JikanAnimeModel.Anime) {
-        binding.title.text = anime.titleEnglish
-        binding.title2.text = anime.synopsis
+        binding.title.text = limitCharacters(anime.titleEnglish ?: "", 27)
+        binding.title2.text = limitCharacters(anime.synopsis, 350)
         Glide.with(this).load(anime.images.jpg.largeImageUrl).into(binding.cover)
     }
 

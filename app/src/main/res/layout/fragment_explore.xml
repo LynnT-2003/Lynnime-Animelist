@@ -68,7 +68,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Jujutsu Kaisen"
-            android:textSize="30dp"
+            android:textSize="24sp"
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="@id/cover"
             app:layout_constraintTop_toBottomOf="@id/tags" />
