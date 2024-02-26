@@ -97,31 +97,31 @@
             android:fontFamily="@font/poppins_bold"
             app:layout_constraintStart_toStartOf="@id/logo"
             app:layout_constraintTop_toBottomOf="@id/animeRecyclerView2"
-            android:text="Continue Browsing"
+            android:text="All Time Favorites"
             android:textSize="24sp"
             android:textColor="@color/white"
             android:paddingTop="4dp"/>
 
-        <TextView
-            android:layout_marginLeft="8dp"
-            android:id="@+id/subcontinueTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            app:layout_constraintStart_toStartOf="@id/logo"
-            app:layout_constraintTop_toBottomOf="@id/animeRecyclerView2"
-            android:text="All Time Popular"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:paddingBottom="6dp"/>
+<!--        <TextView-->
+<!--            android:layout_marginLeft="8dp"-->
+<!--            android:id="@+id/subcontinueTv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            app:layout_constraintStart_toStartOf="@id/logo"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/animeRecyclerView2"-->
+<!--            android:text="All Time Popular"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:paddingBottom="6dp"/>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/animeRecyclerView3"
             android:layout_width="match_parent"
-            android:layout_height="760dp"
+            android:layout_height="790dp"
             android:layout_marginHorizontal="8dp"
-            app:layout_constraintStart_toStartOf="@id/subcontinueTv"
-            app:layout_constraintTop_toBottomOf="@id/subcontinueTv"
+            app:layout_constraintStart_toStartOf="@id/continueTv"
+            app:layout_constraintTop_toBottomOf="@id/continueTv"
             app:layout_constraintBottom_toBottomOf="parent"
             android:paddingBottom="64dp"
             />

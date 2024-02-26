@@ -63,7 +63,7 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment"/>
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -71,7 +71,7 @@
         android:label="MovieDetailsFragment" >
         <action
             android:id="@+id/action_movieDetailsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"/>
     </fragment>
     <fragment
         android:id="@+id/carouselFragment"

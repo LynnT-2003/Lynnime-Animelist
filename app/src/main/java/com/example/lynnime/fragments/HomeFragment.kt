@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             // Set the TextView to the user's display name
-            binding.tv1.text = "Welcome " + user.displayName
+            binding.tv1.text = "Welcome " + user.displayName + "!"
         } else {
             // Handle the case where the user is null (not signed in or signed out)
             binding.tv1.text = "Not signed in"

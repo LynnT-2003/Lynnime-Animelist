@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             // Example of conditional UI update
             when (destination.id) {
-                R.id.onboardingFragment, R.id.carouselFragment -> binding.bottomNavigation.visibility = View.GONE
+                R.id.onboardingFragment, R.id.carouselFragment, R.id.signInFragment -> binding.bottomNavigation.visibility = View.GONE
                 else -> binding.bottomNavigation.visibility = View.VISIBLE
             }
         }

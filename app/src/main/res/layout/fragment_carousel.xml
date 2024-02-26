@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/dark_discovery_bg"
     tools:context=".MainActivity">
 
     <Button
@@ -18,12 +18,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Replace androidx.viewpager.widget.ViewPager with ViewPager2 -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/slideViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="100dp"
+        android:layout_marginVertical="150dp"
         app:layout_constraintBottom_toTopOf="@+id/indicator_layout"
         app:layout_constraintTop_toBottomOf="@+id/skipButton" />
 
@@ -34,7 +33,8 @@
         android:background="#00000000"
         android:text="Back"
         android:layout_marginLeft="32dp"
-        android:textColor="@color/black"
+        android:layout_marginBottom="32dp"
+        android:textColor="#f2f2f2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/slideViewPager" />
 
@@ -45,7 +45,8 @@
         android:background="#00000000"
         android:text="Next"
         android:layout_marginRight="32dp"
-        android:textColor="@color/black"
+        android:layout_marginBottom="32dp"
+        android:textColor="#f2f2f2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/slideViewPager" />
 
