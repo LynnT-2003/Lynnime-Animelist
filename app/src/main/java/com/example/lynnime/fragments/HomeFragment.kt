@@ -32,9 +32,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var animeAdapter: AnimeAdapter
     private lateinit var upcomingAnimeAdapter: AnimeAdapter
+    private lateinit var TopAnimeAdapter: AnimeAdapter
 
     private var animeList: MutableList<JikanAnimeModel.Anime> = mutableListOf()
     private var upcomingAnimeList: MutableList<JikanAnimeModel.Anime> = mutableListOf()
+    private var topAnimeList: MutableList<JikanAnimeModel.Anime> = mutableListOf()
 
     private lateinit var navController: NavController
     override fun onCreateView(
@@ -58,8 +60,11 @@ class HomeFragment : Fragment() {
 
         initRecyclerView()
         initUpcomingRecyclerView()
+        initTopRecyclerView()
+
         fetchAnimeData()
         fetchUpcomingAnimeData()
+        fetchTopAnimeData()
     }
 
     private fun updateUI(user: FirebaseUser?) {
@@ -107,6 +112,24 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
+    private fun fetchTopAnimeData() {
+        RetrofitClient.instance.getTopAnime().enqueue(object : retrofit2.Callback<JikanAnimeModel> {
+            override fun onResponse(call: retrofit2.Call<JikanAnimeModel>, response: retrofit2.Response<JikanAnimeModel>) {
+                if (response.isSuccessful && response.body() != null) {
+                    topAnimeList.clear()
+                    topAnimeList.addAll(response.body()!!.data)
+                    TopAnimeAdapter.notifyDataSetChanged()
+                } else {
+                    Log.e("HomeFragment", "Error fetching top anime data")
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<JikanAnimeModel>, t: Throwable) {
+                Log.e("HomeFragment", "Failure: ${t.message}")
+            }
+        })
+    }
     private fun initRecyclerView() {
         animeAdapter = AnimeAdapter(animeList, { anime ->
             if (isAdded) {
@@ -134,6 +157,21 @@ class HomeFragment : Fragment() {
 
         binding.animeRecyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.animeRecyclerView2.adapter = upcomingAnimeAdapter
+    }
+
+    private fun initTopRecyclerView() {
+        TopAnimeAdapter = AnimeAdapter(topAnimeList, { anime ->
+            // Similar onClick functionality
+            if (isAdded) {
+                val bundle = Bundle().apply {
+                    putParcelable("animeData", anime)
+                }
+                findNavController().safeNavigate(R.id.action_homeFragment_to_movieDetailsFragment, bundle)
+            }
+        }, limitTitleLength = true)
+
+        binding.animeRecyclerView3.layoutManager = GridLayoutManager(context, 3)
+        binding.animeRecyclerView3.adapter = TopAnimeAdapter
     }
 
 

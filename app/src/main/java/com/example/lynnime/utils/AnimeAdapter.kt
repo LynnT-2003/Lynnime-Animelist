@@ -51,7 +51,8 @@ class AnimeAdapter(
     private val onAnimeClick: (JikanAnimeModel.Anime) -> Unit,
     private val limitTitleLength: Boolean = false,
     private val showRecentlyAddedLabel: Boolean = false,
-    private val showPopularLabel: Boolean = false
+    private val showPopularLabel: Boolean = false,
+    private val showAllTimeBestLabel: Boolean = false
 ) : RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
 
     class AnimeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -59,6 +60,7 @@ class AnimeAdapter(
         val posterImageView: ImageView = view.findViewById(R.id.moviePosterImageView)
         val recentlyAddedLabelView: TextView = view.findViewById(R.id.recentlyAddedLabel)
         val popularLabel: TextView = view.findViewById(R.id.popularLabel)
+        val allTimeBestLabel: TextView = view.findViewById(R.id.allTimeBestLabel)
 //        val scoreTextView: TextView = view.findViewById(R.id.animeScoreTextView)
         // Add more views if needed
     }
@@ -88,6 +90,12 @@ class AnimeAdapter(
             holder.popularLabel.visibility = View.VISIBLE
         } else {
             holder.popularLabel.visibility = View.GONE
+        }
+
+        if (position < 5 && showAllTimeBestLabel) {
+            holder.allTimeBestLabel.visibility = View.VISIBLE
+        } else {
+            holder.allTimeBestLabel.visibility = View.GONE
         }
 
         val imageUrl = anime.images.jpg.largeImageUrl ?: ""

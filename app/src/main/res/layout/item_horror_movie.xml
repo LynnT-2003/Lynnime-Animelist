@@ -59,6 +59,21 @@
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"/>
 
+
+            <TextView
+                android:id="@+id/allTimeBestLabel"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/moviePosterImageView"
+                app:layout_constraintEnd_toEndOf="@id/moviePosterImageView"
+                app:layout_constraintBottom_toBottomOf="@id/moviePosterImageView"
+                android:background="#E50914"
+                android:text="All Time Best"
+                android:paddingHorizontal="5dp"
+                android:textSize="8sp"
+                android:textColor="#FFFFFF"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
