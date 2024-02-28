@@ -1,11 +1,13 @@
 package com.example.lynnime.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -49,6 +51,45 @@ class ProfileFragment : Fragment() {
             Firebase.auth.signOut()
             findNavController().navigate(R.id.onboardingFragment)
         }
+
+        binding.createWatchlistBtn.setOnClickListener {
+            // Trigger the watchlist creation process
+            createNewWatchlist()
+        }
+    }
+
+    private fun createNewWatchlist() {
+        val editText = EditText(context)
+        AlertDialog.Builder(context)
+            .setTitle("Create New Watchlist")
+            .setView(editText)
+            .setPositiveButton("Create") { dialog, which ->
+                val watchlistName = editText.text.toString()
+                if (watchlistName.isNotEmpty()) {
+                    addWatchlistToFirebase(watchlistName)
+                } else {
+                    Toast.makeText(context, "Watchlist name cannot be empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun addWatchlistToFirebase(watchlistName: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val watchlist = mapOf("name" to watchlistName)
+
+        FirebaseFirestore.getInstance().collection("Users")
+            .document(userId)
+            .collection("Watchlists")
+            .add(watchlist)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Watchlist created successfully", Toast.LENGTH_SHORT).show()
+                // Optionally, refresh the watchlist RecyclerView
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Error creating watchlist: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun initRecyclerView() {
