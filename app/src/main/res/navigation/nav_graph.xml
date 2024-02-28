@@ -26,11 +26,11 @@
             android:id="@+id/action_onboardingFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
         <action
-            android:id="@+id/action_onboardingFragment_to_carouselFragment"
-            app:destination="@id/carouselFragment" />
-        <action
             android:id="@+id/action_onboardingFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_carouselFragment"
+            app:destination="@id/carouselFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"

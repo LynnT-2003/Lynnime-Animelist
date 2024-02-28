@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.ktx.firestore
+
 
 
 class HomeFragment : Fragment() {
@@ -52,6 +54,26 @@ class HomeFragment : Fragment() {
 
         val currentUser = Firebase.auth.currentUser
         updateUI(currentUser)
+
+
+        currentUser?.let {
+            val userMap = hashMapOf(
+                "username" to currentUser.displayName,
+                "email" to currentUser.email
+                // Add other user details you might need
+            )
+
+            val db = Firebase.firestore
+            db.collection("Users").document(currentUser.uid)
+                .set(userMap)
+                .addOnSuccessListener {
+                    Log.d("Firestore", "User added to Firestore")
+                }
+                .addOnFailureListener {
+                    Log.w("Firestore", "Error adding user")
+                }
+        }
+
 
 //        binding.btnSignOut.setOnClickListener {
 //            Firebase.auth.signOut()

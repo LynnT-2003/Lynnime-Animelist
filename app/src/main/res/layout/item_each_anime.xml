@@ -42,7 +42,8 @@
                 android:text="Recently Added"
                 android:paddingHorizontal="5dp"
                 android:textSize="12sp"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
 
 
             <TextView
@@ -57,7 +58,8 @@
                 android:text="Trending / Popular"
                 android:paddingHorizontal="5dp"
                 android:textSize="12sp"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
 
 
             <TextView
@@ -72,7 +74,8 @@
                 android:text="All Time Best"
                 android:paddingHorizontal="5dp"
                 android:textSize="8sp"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

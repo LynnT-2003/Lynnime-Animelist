@@ -22,7 +22,7 @@ class HorrorMovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorrorMovieViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_horror_movie, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_each_anime, parent, false)
         return HorrorMovieViewHolder(view)
     }
 
