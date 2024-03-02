@@ -2,18 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingVertical="8dp"
     android:paddingHorizontal="2dp">
 
-    <TextView
-        android:id="@+id/watchlistTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:fontFamily="@font/poppins_bold"
-        android:paddingVertical="8dp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/watchlistTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Example Watchlist"
+            android:paddingVertical="8dp"/>
+
+
+        <Button
+            android:id="@+id/shareButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/watchlist_share"
+            android:padding="0dp"
+            android:fontFamily="@font/poppins"
+            app:layout_constraintStart_toEndOf="@id/watchlistTitle"
+            app:layout_constraintTop_toTopOf="@id/watchlistTitle"
+            app:layout_constraintBottom_toBottomOf="@id/watchlistTitle"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="12dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/watchlistRecyclerView"

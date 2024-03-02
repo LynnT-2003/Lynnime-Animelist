@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +25,7 @@ import com.example.lynnime.utils.WatchlistAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
@@ -217,6 +219,7 @@ class ProfileFragment : Fragment() {
             // Inflate a layout for the watchlist section
             val watchlistView = layoutInflater.inflate(R.layout.watchlist_section, container, false)
             val watchlistTitle = watchlistView.findViewById<TextView>(R.id.watchlistTitle)
+            val shareButton = watchlistView.findViewById<Button>(R.id.shareButton)
             val watchlistRecyclerView =
                 watchlistView.findViewById<RecyclerView>(R.id.watchlistRecyclerView)
 
@@ -234,15 +237,90 @@ class ProfileFragment : Fragment() {
                 watchlistRecyclerView.adapter = animeAdapter
             }
 
-            // Add the watchlist view to the container
+            // Set up the share button
+            shareButton.setOnClickListener {
+                shareWatchlist(watchlist)
+            }
+
             container.addView(watchlistView)
         }
     }
 
+    private fun shareWatchlist(watchlist: Watchlist) {
+        val editText = EditText(context).apply {
+            hint = "Enter user UID"
+        }
+        AlertDialog.Builder(context)
+            .setTitle("Share Watchlist: ${watchlist.name}")
+            .setView(editText)
+            .setPositiveButton("Share") { dialog, which ->
+                val targetUid = editText.text.toString()
+                if (targetUid.isNotEmpty()) {
+                    // Pass watchlist.id when you have it; for now, assuming you have watchlistName
+                    watchlist.name?.let { watchlist.animeList?.let { it1 ->
+                        shareWatchlistToUser(targetUid, it,
+                            it1
+                        )
+                    } }
+                } else {
+                    Toast.makeText(context, "UID cannot be empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
 
 
 
+    private fun shareWatchlistToUser(targetUid: String, watchlistName: String, animeList: List<WatchlistAnime>) {
+        val db = FirebaseFirestore.getInstance()
 
+        // Check if the target UID exists
+        db.collection("Users").document(targetUid).get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    // Target user exists, create a new watchlist document
+                    val newWatchlistRef = db.collection("Users").document(targetUid)
+                        .collection("Watchlists").document()
+
+                    newWatchlistRef.set(mapOf("name" to watchlistName))
+                        .addOnSuccessListener {
+                            // Now share each anime in the AnimeList
+                            animeList.forEach { anime ->
+                                newWatchlistRef.collection("AnimeList").add(anime)
+                            }
+                            Toast.makeText(context, "Watchlist shared successfully", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(context, "Failed to create watchlist: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(context, "No user found with the provided UID", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Error checking user: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+    private fun shareAnimeList(db: FirebaseFirestore, sourceWatchlistId: String, newWatchlistRef: DocumentReference) {
+        // Get the AnimeList from the source watchlist
+        db.collection("Users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .collection("Watchlists").document(sourceWatchlistId)
+            .collection("AnimeList")
+            .get()
+            .addOnSuccessListener { animeListSnapshot ->
+                for (animeSnapshot in animeListSnapshot) {
+                    // For each anime, create a new document in the target watchlist's AnimeList collection
+                    newWatchlistRef.collection("AnimeList").add(animeSnapshot.data)
+                }
+                Toast.makeText(context, "Watchlist shared successfully", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Failed to share anime list: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
 
 
 
