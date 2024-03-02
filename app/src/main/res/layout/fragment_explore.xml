@@ -96,27 +96,28 @@
             android:gravity="center"
             >
 
-            <ImageView
+            <Button
+                android:id="@+id/btnDetails"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/dark_info_2" />
 
 
-            <ImageView
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="43.75dp"
                 android:background="@drawable/dark_dislike" />
 
 
-            <ImageView
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="43.75dp"
                 android:background="@drawable/dark_like" />
 
 
-            <ImageView
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="43.75dp"

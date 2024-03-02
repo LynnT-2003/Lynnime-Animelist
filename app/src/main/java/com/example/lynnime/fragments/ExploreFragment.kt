@@ -45,10 +45,31 @@ class ExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        horrorMovieAdapter = HorrorMovieAdapter(horrorMoviesList) {}
-        animeAdapter = AnimeAdapter(animeList, {}, limitTitleLength = true)
+        animeAdapter = AnimeAdapter(animeList, {anime ->
+            val bundle = Bundle().apply {
+                putParcelable("animeData", anime) // Ensure Anime data class is Parcelable
+            }
+            findNavController().navigate(R.id.action_exploreFragment_to_movieDetailsFragment, bundle)}, limitTitleLength = true)
 
         super.onViewCreated(view, savedInstanceState)
-        fetchAnimeData()
+//        fetchAnimeData()
+        fetchCombinedAnimeData()
+
+        if (animeList.isNotEmpty()) {
+            currentIndex = (currentIndex + 1) % animeList.size
+            updateUI(animeList[currentIndex])
+        }
+
+        // If btnShowDetails is meant to show details of a specific item, set its OnClickListener
+        binding.btnDetails.setOnClickListener {
+            animeList.getOrNull(currentIndex)?.let { anime ->
+                val bundle = Bundle().apply {
+                    putParcelable("animeData", anime)
+                }
+                findNavController().navigate(R.id.action_exploreFragment_to_movieDetailsFragment, bundle)
+            }
+        }
+
         view.setOnClickListener {
             if (animeList.isNotEmpty()) {
                 currentIndex = (currentIndex + 1) % animeList.size
@@ -100,6 +121,36 @@ class ExploreFragment : Fragment() {
         })
     }
 
+
+
+    private fun fetchCombinedAnimeData() {
+        val calls = listOf(
+            RetrofitClient.instance.getCurrentSeasonAnime(),
+            RetrofitClient.instance.getTopAnime(),
+            RetrofitClient.instance.getUpcomingSeasonAnime()
+        )
+
+        calls.forEach { call ->
+            call.enqueue(object : retrofit2.Callback<JikanAnimeModel> {
+                override fun onResponse(call: retrofit2.Call<JikanAnimeModel>, response: retrofit2.Response<JikanAnimeModel>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        animeList.addAll(response.body()!!.data)
+                        if (animeList.size == calls.size * response.body()!!.data.size) {
+                            animeList.shuffle()
+                            animeAdapter.notifyDataSetChanged()
+                        }
+                    } else {
+                        Log.e("ExploreFragment", "Error fetching anime data")
+                    }
+                }
+
+                override fun onFailure(call: retrofit2.Call<JikanAnimeModel>, t: Throwable) {
+                    Log.e("ExploreFragment", "Failure: ${t.message}")
+                }
+            })
+        }
+    }
+
 //    fun updateUI(movie: HorrorMovieData) {
 //        binding.title.text = movie.title
 ////        binding.title2.text = movie.description
@@ -117,7 +168,7 @@ class ExploreFragment : Fragment() {
 
     private fun updateUI(anime: JikanAnimeModel.Anime) {
         binding.title.text = limitCharacters(anime.titleEnglish ?: "", 27)
-        binding.title2.text = limitCharacters(anime.synopsis, 350)
+        binding.title2.text = limitCharacters(anime.synopsis, 200)
         Glide.with(this).load(anime.images.jpg.largeImageUrl).into(binding.cover)
     }
 
