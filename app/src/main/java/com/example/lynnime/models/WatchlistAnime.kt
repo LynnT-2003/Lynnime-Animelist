@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Watchlist(
-    val name: String,
-    val animeList: MutableList<WatchlistAnime>
+    val name: String? = null,
+    val animeList: MutableList<WatchlistAnime>? = null
 ) : Parcelable
 
 @Parcelize

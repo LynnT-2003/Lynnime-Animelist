@@ -56,15 +56,30 @@
         app:layout_constraintStart_toStartOf="@id/userTv"
         app:layout_constraintTop_toBottomOf="@id/userTv" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/watchlistRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/currentTv"
-        app:layout_constraintEnd_toEndOf="@id/signOutBtn"
-        app:layout_constraintTop_toBottomOf="@id/currentTv"
-        android:paddingBottom="172dp"
-        />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/watchlistRecyclerView"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="@id/currentTv"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/signOutBtn"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/currentTv"-->
+<!--        android:paddingBottom="172dp"-->
+<!--        />-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/userTv">
+
+        <LinearLayout
+            android:id="@+id/watchlistContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Dynamic watchlist sections will be added here -->
+        </LinearLayout>
+    </ScrollView>
+
 
 
 
