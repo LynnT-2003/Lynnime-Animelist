@@ -43,19 +43,6 @@
         android:text="Create +"
         android:layout_marginRight="12dp"/>
 
-    <TextView
-        android:id="@+id/currentTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:paddingTop="24dp"
-        android:paddingBottom="6dp"
-        android:text="Watchlist"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@id/userTv"
-        app:layout_constraintTop_toBottomOf="@id/userTv" />
-
 <!--    <androidx.recyclerview.widget.RecyclerView-->
 <!--        android:id="@+id/watchlistRecyclerView"-->
 <!--        android:layout_width="0dp"-->
@@ -69,7 +56,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/userTv">
+        android:layout_marginVertical="64dp">
 
         <LinearLayout
             android:id="@+id/watchlistContainer"
