@@ -326,7 +326,7 @@ class ProfileFragment : Fragment() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            binding.userTv.text = user.displayName
+            binding.userTv.text = user.uid
         } else {
             binding.userTv.text = "User Not Available (Note to Self: Please don't get disappointed at this message"
         }

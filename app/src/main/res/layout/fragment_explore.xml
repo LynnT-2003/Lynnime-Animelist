@@ -118,6 +118,7 @@
 
 
             <Button
+                android:id="@+id/btnAdd"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="43.75dp"

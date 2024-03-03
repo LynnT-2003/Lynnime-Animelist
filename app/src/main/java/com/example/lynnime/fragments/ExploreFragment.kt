@@ -1,6 +1,7 @@
 package com.example.lynnime.fragments
 
 import JikanAnimeModel
+import android.app.AlertDialog
 import android.graphics.Movie
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,9 @@ import com.example.lynnime.models.HorrorMovieData
 import com.example.lynnime.utils.AnimeAdapter
 import com.example.lynnime.utils.HorrorMovieAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ExploreFragment : Fragment() {
 
@@ -67,6 +72,12 @@ class ExploreFragment : Fragment() {
                     putParcelable("animeData", anime)
                 }
                 findNavController().navigate(R.id.action_exploreFragment_to_movieDetailsFragment, bundle)
+            }
+        }
+
+        binding.btnAdd.setOnClickListener {
+            animeList.getOrNull(currentIndex)?.let { anime ->
+                showWatchlistSelectionDialog(anime)
             }
         }
 
@@ -151,6 +162,58 @@ class ExploreFragment : Fragment() {
         }
     }
 
+
+
+    private fun showWatchlistSelectionDialog(currentAnime: JikanAnimeModel.Anime) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        FirebaseFirestore.getInstance().collection("Users").document(userId).collection("Watchlists")
+            .get()
+            .addOnSuccessListener { documents ->
+                val watchlistNames = documents.map { it.getString("name") ?: "" }.toTypedArray()
+                var selectedWatchlistName: String? = null
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Select Watchlist")
+                    .setSingleChoiceItems(watchlistNames, -1) { dialog, which ->
+                        selectedWatchlistName = watchlistNames[which]
+                    }
+                    .setPositiveButton("Add") { dialog, which ->
+                        selectedWatchlistName?.let { addToWatchlist(it, currentAnime) }
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+    }
+
+    private fun addToWatchlist(watchlistName: String, anime: JikanAnimeModel.Anime) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val animeToAdd = hashMapOf(
+            "title" to anime.titleEnglish,
+            "synopsis" to anime.synopsis,
+            "imageUrl" to anime.images.jpg.largeImageUrl
+        )
+
+        FirebaseFirestore.getInstance().collection("Users").document(userId)
+            .collection("Watchlists").whereEqualTo("name", watchlistName)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    Toast.makeText(context, "Watchlist not found", Toast.LENGTH_SHORT).show()
+                    return@addOnSuccessListener
+                }
+                val watchlistId = documents.documents.first().id
+                FirebaseFirestore.getInstance().collection("Users").document(userId)
+                    .collection("Watchlists").document(watchlistId)
+                    .collection("AnimeList")
+                    .add(animeToAdd)
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Anime added to watchlist", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(context, "Error adding anime to watchlist: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+    }
+
 //    fun updateUI(movie: HorrorMovieData) {
 //        binding.title.text = movie.title
 ////        binding.title2.text = movie.description
@@ -163,7 +226,7 @@ class ExploreFragment : Fragment() {
         if (text != null) {
             return if (text.length <= maxChars) text else text.take(maxChars) + "..."
         }
-        return "(Title Not Available)"
+        return "(Description Not Available)"
     }
 
     private fun updateUI(anime: JikanAnimeModel.Anime) {

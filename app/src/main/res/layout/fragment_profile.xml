@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="@id/signOutBtn"
         app:layout_constraintBottom_toBottomOf="@id/signOutBtn"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="24sp"
+        android:textSize="9sp"
         android:layout_marginHorizontal="12dp"
         android:text="Firebase User "
         android:textColor="#FFFFFF"
